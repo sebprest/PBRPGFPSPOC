@@ -18,10 +18,32 @@ public class PlayerController : MonoBehaviour
         playerCamera = transform.Find("Main Camera").GetComponent<Camera>();
     }
 
+    private void Start()
+    {
+        LockCamera();
+    }
+
     private void Update()
     {
         HandleMovement();
-        HandleMouseLook();
+
+        if (CanMoveCamera())
+        {
+            HandleMouseLook();
+
+            if (Input.GetButton("Cancel"))
+            {
+                UnlockCamera();
+            }
+        }
+
+        if (!CanMoveCamera())
+        {
+            if (Input.GetButton("Fire1"))
+            {
+                LockCamera();
+            }
+        }
     }
 
     private void HandleMovement()
@@ -46,5 +68,20 @@ public class PlayerController : MonoBehaviour
         cameraAngleY = Mathf.Clamp(cameraAngleY, -90f, 90f);
 
         playerCamera.transform.localRotation = Quaternion.Euler(cameraAngleY, 0f, 0f);
+    }
+
+    private bool CanMoveCamera()
+    {
+        return Cursor.lockState == CursorLockMode.Locked;
+    }
+
+    private void LockCamera()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void UnlockCamera()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 }
