@@ -45,6 +45,6 @@ public class PlayerController : MonoBehaviour
         // Clamp xRotation to prevent the camera pointing behind the player's head
         cameraAngleY = Mathf.Clamp(cameraAngleY, -90f, 90f);
 
-        playerCamera.transform.rotation = Quaternion.Euler(cameraAngleY, 0f, 0f);
+        playerCamera.transform.localRotation = Quaternion.Euler(cameraAngleY, 0f, 0f);
     }
 }
