@@ -11,11 +11,19 @@ public class PlayerController : MonoBehaviour
 
     private Camera playerCamera;
     private CharacterController controller;
+    private PartyMemberController[] partyMembers;
+    private PartyMemberController currentPartyMember;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         playerCamera = transform.Find("Main Camera").GetComponent<Camera>();
+        partyMembers = GetComponentsInChildren<PartyMemberController>();
+
+        if (partyMembers.Length > 0)
+            currentPartyMember = partyMembers[0];
+        else
+            Debug.LogError("No party members were found!");
     }
 
     private void Start()
