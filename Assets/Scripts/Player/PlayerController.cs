@@ -25,10 +25,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
-
         if (CanMoveCamera())
         {
+            HandleMovement();
             HandleMouseLook();
 
             if (Input.GetButton("Cancel"))
