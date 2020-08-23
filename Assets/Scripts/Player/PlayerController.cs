@@ -39,18 +39,12 @@ public class PlayerController : MonoBehaviour
             HandleMouseLook();
 
             if (Input.GetButton("Cancel"))
-            {
                 UnlockCamera();
-            }
         }
 
         if (!CanMoveCamera())
-        {
             if (Input.GetButton("Fire1"))
-            {
                 LockCamera();
-            }
-        }
     }
 
     private void HandleMovement()
