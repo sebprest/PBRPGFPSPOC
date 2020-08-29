@@ -21,7 +21,10 @@ public class PlayerController : MonoBehaviour
         partyMembers = GetComponentsInChildren<PartyMemberController>();
 
         if (partyMembers.Length > 0)
+        {
             currentPartyMember = partyMembers[0];
+            currentPartyMember.ShowWeapon();
+        }
         else
             Debug.LogError("No party members were found!");
     }
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleMovement();
             HandleMouseLook();
+            HandleSwitchingPartymembers();
 
             if (Input.GetButton("Cancel"))
                 UnlockCamera();
@@ -69,6 +73,27 @@ public class PlayerController : MonoBehaviour
         cameraAngleY = Mathf.Clamp(cameraAngleY, -90f, 90f);
 
         playerCamera.transform.localRotation = Quaternion.Euler(cameraAngleY, 0f, 0f);
+    }
+
+    private void HandleSwitchingPartymembers()
+    {
+        /* TODO: Implement a more robust solution that will enable the player
+         * to have a party size other than four */
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SwitchToPartyMember(partyMembers[0]);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            SwitchToPartyMember(partyMembers[1]);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SwitchToPartyMember(partyMembers[2]);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            SwitchToPartyMember(partyMembers[3]);
+    }
+
+    private void SwitchToPartyMember(PartyMemberController partyMember)
+    {
+        currentPartyMember.HideWeapon();
+        currentPartyMember = partyMember;
+        currentPartyMember.ShowWeapon();
     }
 
     private bool CanMoveCamera()
