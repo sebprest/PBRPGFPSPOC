@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 12f;
-    public float mouseSensitivity;
+    public float mouseSensitivity = 1f;
 
     private float cameraAngleY = 0f;
 
