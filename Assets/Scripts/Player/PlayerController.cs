@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
             HandleMouseLook();
             HandleSwitchingPartymembers();
+            HandleAttacking();
 
             if (Input.GetButton("Cancel"))
                 UnlockCamera();
@@ -94,6 +95,12 @@ public class PlayerController : MonoBehaviour
         currentPartyMember.HideWeapon();
         currentPartyMember = partyMember;
         currentPartyMember.ShowWeapon();
+    }
+
+    private void HandleAttacking()
+    {
+        if (Input.GetButton("Fire1"))
+            currentPartyMember.Attack();
     }
 
     private bool CanMoveCamera()
