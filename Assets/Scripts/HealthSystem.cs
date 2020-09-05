@@ -23,4 +23,9 @@ public class HealthSystem
         if (currentHealth < 0)
             currentHealth = 0;
     }
+
+    public bool isDead()
+    {
+        return currentHealth <= 0;
+    }
 }
