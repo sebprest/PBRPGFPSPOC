@@ -19,5 +19,8 @@ public class HealthSystem
     public void Damage(int amount)
     {
         currentHealth -= amount;
+
+        if (currentHealth < 0)
+            currentHealth = 0;
     }
 }
